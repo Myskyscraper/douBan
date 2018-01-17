@@ -1,11 +1,7 @@
 <template>
 
 	<div class="book_con">
-		<div>音乐</div>
-
-		<button >音乐</button><button>图书</button>
-
-		<router-link to="/user/02">图书</router-link>
+		test
 	</div>
 
 
@@ -17,12 +13,14 @@
 	import router from '.././router'
 
 	export default {
-		name:"Music",
+		name:"Test",
 		data(){
+
 			return {
 				title:"book"
 
 			}
+
 
 		}
 
@@ -30,19 +28,10 @@
 
 
 
-
-
-
 </script>
 
 
 <style>
-	button{
-		margin: 20px 40px;
-	}
-
-
-
-
+	
 
 </style>
