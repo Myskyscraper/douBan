@@ -1,6 +1,7 @@
 import Vue from 'vue'
+
 import Router from 'vue-router'
-import Axios from 'axios'
+
 
 
 import HelloWorld from '@/components/HelloWorld'
@@ -12,17 +13,19 @@ import Music from '@/components/Music'
 import Test from '@/components/Test'
 
 
+
 Vue.use(Router);
+
 
 
 export default new Router({
 
 	routes: [{
 			path: '/user/01',
-			component: Music
+			component: Book
 		}, {
 			path: "/user/02",
-			component: Book
+			component: Music
 		}, {
 			path: '/',
 			redirect: '/user/01'

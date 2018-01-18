@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<script type="text/javascript">
+	proxyTable: {
+
+            '/api': {
+                target: 'https://api.douban.com/v2/', //设置你调用的接口域名和端口号 别忘了加http
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/api': '/'
+                }
+
+            },
+
+	
+</script>
+
+</body>
+</html>

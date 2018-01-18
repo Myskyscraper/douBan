@@ -23,4 +23,24 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 
 
+<!-- 安装less -->
+
+npm install less less-loader --save-dev
+
+
+<!-- webpack中修改配置 -->
+在webpack.dev.conf.js中，我们可以看到下面的代码：
+
+ module: {
+    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
+  },
+
+<!-- 修改那style状态 -->
+
+<style scoped lang="less">
+	
+
+</style>
+
+
 

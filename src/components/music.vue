@@ -5,7 +5,7 @@
 
 		<button >音乐</button><button>图书</button>
 
-		<router-link to="/user/02">图书</router-link>
+		<router-link to="/user/01">图书</router-link>
 	</div>
 
 
@@ -21,7 +21,6 @@
 		data(){
 			return {
 				title:"book"
-
 			}
 
 		}
