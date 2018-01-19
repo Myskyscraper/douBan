@@ -1,40 +1,84 @@
 <template>
 
 	<div class="book_con">
+
 		<div class="book_title">最受关注图书|虚构类</div>
+
+
 		
-		<div class="book-wrap">
-
-
 		<ul class="rows-books">
 
 
 			<li v-on:click="showAlldata">
-				<div class="item-book">
-					<div class="item-img">
-						<img src="" alt="">
-					</div>
-					<span class="item-title">白天的房子，夜晚的房子</span>
 
-					<div class="item-rating">
-						<div class="rank">
-							<span class="rating-stars" data-rating="4.7"><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span></span> <span>9.3</span>
-						</div>
+				<div class="item-book">
+
+					<div class="item-img">
+						<img v-bind:src='bookInfo.image' alt="">
 					</div>
+
+					<div class="item-info">
+
+						<div class="item-title">{{bookInfo.title}}</div>
+
+						<p class="item-author">
+						
+							<span v-for="itemAut in bookAuthor">{{itemAut}}</span>
+
+						</p>
+						<!-- bookInfo.price为78.90元，我想把“元”去掉 -->
+						<p class="item-prize">{{bookPrize|formPrize}}</p>
+
+						<div class="item-rating">
+							<div class="item-numRaters">{{bookRating.numRaters|formComment}}</div>
+							<div class="rank">
+								<span class="rating-stars" data-rating="4.7"><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span></span> <span>9.3</span>
+							</div>
+						</div>
+
+					</div>
+					
 				</div>
 			</li>
 
 
-			
+
+			<li v-on:click="showAlldata">
+
+				<div class="item-book">
+
+					<div class="item-img">
+						<img v-bind:src='bookInfo.image' alt="">
+					</div>
+
+					<div class="item-info">
+
+						<div class="item-title">{{bookInfo.title}}</div>
+
+						<p class="item-author">
+						
+							<span v-for="itemAut in bookAuthor">{{itemAut}}</span>
+
+						</p>
+						<!-- bookInfo.price为78.90元，我想把“元”去掉 -->
+						<p class="item-prize">{{bookPrize|formPrize}}</p>
+
+						<div class="item-rating">
+							<div class="item-numRaters">{{bookRating.numRaters|formComment}}</div>
+							<div class="rank">
+								<span class="rating-stars" data-rating="4.7"><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span></span> <span>9.3</span>
+							</div>
+						</div>
+
+					</div>
+					
+				</div>
+			</li>
+
+
+
 
 		</ul>
-
-		</div>
-		
-
-
-
-
 
 	</div>
 
@@ -51,24 +95,43 @@
 		data(){
 			return {
 				title:"book",
-				msg:'hah'
+				msg:'hah',
+				bookInfo:'',
+				bookRating:'',
+				bookAuthor:'',
+				bookPrize:''
 			}
 		},
+		filters:{
+			 formatTxt:function(value){
+				return value;
+			 },
+			 formPrize:function(value){
+			 	return  value ? "￥" + (value.slice(0, value.length - 1))  :  "" ;
+			 },
+			 formComment:function(value){
+				var values =  value+"条好评";
+			 	return values;
+			 }
+		},
+
 		created(){
-			
+			this.$axios({
+				method:'get',
+				url:'/api/book/1003079'
+			}).then(response =>{
+				console.log(response.data)
+				this.bookInfo = response.data;
+				this.bookRating = this.bookInfo.rating;
+				this.bookAuthor = this.bookInfo.author;
+				this.bookPrize = this.bookInfo.price;
+			})
 		},
 		methods:{
-			
+
 			showAlldata(){
-				this.$axios({
-					method:'get',
-					url:'/api/book/1220562'
-				}).then(response =>{
-					console.log(response.data)
-				})
-				
+
 				}
-				
 			}
 
 	}
@@ -77,42 +140,58 @@
 
 
 <style scoped lang="less">
-ul,li{
-  list-style: none;
+*{margin: 0;padding: 0;}
+li{list-style: none;}
+
+@font_color:#111;
+
+@subtxt:#848689;
+
+
+.book_con{
+	.book_title{
+		font-size: 16px;
+		line-height: 24px;
+		margin: 10px 0;
+	}
+
+	.rows-books{	
+		font-size: 14px;
+		li{	
+			margin-bottom: 11px;
+			border-bottom: 1px solid #cccccc;
+			padding-bottom: 5px;
+			.item-book{
+				display: flex;
+				.item-img{
+					flex: 1;
+					padding: 5px 10px;	
+				}
+				.item-info{
+					flex: 2;
+					.item-title{
+						font-size: 16px;
+						margin-bottom: 4px;
+					}
+					.item-author{
+						font-size: 14px;
+						color: @subtxt;
+						margin-bottom: 45px;
+					}
+					.item-prize{
+						color: #f23030;
+					}
+					.item-numRaters{
+						font-size: 13px;
+						color: #848689;
+					}
+				}
+
+			}
+			
+		}
+	}
 }
-  @font_color:#111;
-
-  .book_con{
-  	.book_title{
-  		font-size: 16px;
-  		line-height: 24px;
-  		margin-top: 10px;
-  	}
-
-  	.book-wrap{
-  		width: 400px;
-  		height: 250px;
-  		overflow-x:scroll; 
-  		.rows-books{
-  			width: 400px;
-  			height: 250px;
-  			
-  			font-size: 14px;
-  			li{
-  				float: left;
-  				width: 120px;
-  				.item-img{
-  					margin: 0 auto;
-  					width: 100px;
-  					height: 145px;
-  				}
-  			}
-  		}
-  	}
-  	
-
-
-  }
 
   
 </style>

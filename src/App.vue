@@ -14,7 +14,6 @@
     </nav>
 
     
-
     </header>
 
 
@@ -32,60 +31,61 @@ export default {
 
 <style scoped lang="less">
 /*样式开始*/
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-hr,
-p,
-blockquote,
-dl,
-dt,
-dd,
-ul,
-ol,
-li,
-pre,
-form,
-fieldset,
-legend,
-button,
-input,
-textarea,
-th,
-td {
-  margin: 0;
-  padding: 0;
-}
+#app{width: 100%;height: 100%;}
+*{margin: 0;padding: 0;}
+li{list-style: none;}
+a{text-decoration: none;}
 
-ul,li{
-  list-style: none;
-}
 
-a{
-  text-decoration: none;
-}
 
 /*样式结束*/
   @font_color:#111;
 
-.header nav{
-  font-size: 20px;
-  display: flex;
-  padding-bottom: 9px;
-  border-bottom: 1px solid @font_color;
-  li{
-    flex:1;
-  }
- .logo{
-    flex: 2;
-    color: #00b600!important;
-  }
+  @font1:#00b600;
+  @font2:#2384E8;
+  @font3:#9F7860;
+  @font4:#E4A813;
+  @font5:#2AB8CC;
 
-}
+
+
+
+  .header nav{
+      font-size: 20px;
+      display: flex;
+      padding-bottom: 9px;
+      border-bottom: 1px solid @font_color;
+      li{
+        &:nth-child(1){
+          a{color:#00b600;font-size: 24px;}
+        }
+        &:nth-child(2){
+          a{color: #2384E8;}
+        }
+        &:nth-child(3){
+          a{color: #9F7860;}
+        }
+        &:nth-child(4){
+          a{color: #E4A813;}
+        }
+        &:nth-child(5){
+          a{color: #2AB8CC;}
+        }
+        flex:1;
+        a{
+          font-size: 16px;
+          color: @font_color;
+        }
+      }
+
+
+
+      .logo{
+        flex: 2;
+        color: #00b600!important;
+      }
+
+  }
 
 
 
