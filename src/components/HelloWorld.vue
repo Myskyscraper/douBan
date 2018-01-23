@@ -5,6 +5,8 @@
 </template>
 
 <script>
+
+
 export default {
   name: 'HelloWorld',
   data () {
@@ -17,7 +19,6 @@ export default {
       console.log(this.$route.path);
     }
   }
-
 }
 </script>
 

@@ -76,6 +76,46 @@
 			</li>
 
 
+			<!-- 循环开始 -->
+				<li v-for="item in allShop">
+
+				<div class="item-book">
+
+					<div class="item-img">
+						<img v-bind:src='item.image' alt="">
+					</div>
+
+					<div class="item-info">
+
+						
+
+						<div class="item-title">{{item.title}}</div>
+
+						<p class="item-author">
+						
+							<span v-for="itemAut in bookAuthor">{{itemAut}}</span>
+
+						</p>
+						<!-- bookInfo.price为78.90元，我想把“元”去掉 -->
+						<p class="item-prize">{{bookPrize|formPrize}}</p>
+
+						<div class="item-rating">
+							<div class="item-numRaters">{{bookRating.numRaters|formComment}}</div>
+							<div class="rank">
+								<span class="rating-stars" data-rating="4.7"><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span></span> <span>9.3</span>
+							</div>
+						</div>
+
+					</div>
+					
+				</div>
+			 </li>
+
+
+
+			<!-- 循环结束 -->
+
+
 
 
 		</ul>
@@ -99,7 +139,8 @@
 				bookInfo:'',
 				bookRating:'',
 				bookAuthor:'',
-				bookPrize:''
+				bookPrize:'',
+				allShop:[]
 			}
 		},
 		filters:{
@@ -114,23 +155,27 @@
 			 	return values;
 			 }
 		},
-
 		created(){
-			this.$axios({
+
+
+			for(let i=0;i<4;i++){
+				this.$axios({
 				method:'get',
-				url:'/api/book/1003079'
+				url:'/api/book/100307'+i//例如：api/book/1003071为一个书本内容
 			}).then(response =>{
-				console.log(response.data)
 				this.bookInfo = response.data;
+				this.allShop[i]=response.data;
 				this.bookRating = this.bookInfo.rating;
 				this.bookAuthor = this.bookInfo.author;
 				this.bookPrize = this.bookInfo.price;
+				console.log(i);	
 			})
+			}
 		},
 		methods:{
-
 			showAlldata(){
-
+					console.log(this.bookInfo);
+					console.log(this.allShop);
 				}
 			}
 
