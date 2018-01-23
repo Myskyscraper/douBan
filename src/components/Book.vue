@@ -9,41 +9,9 @@
 		<ul class="rows-books">
 
 
-			<li v-on:click="showAlldata">
+			
 
-				<div class="item-book">
-
-					<div class="item-img">
-						<img v-bind:src='bookInfo.image' alt="">
-					</div>
-
-					<div class="item-info">
-
-						<div class="item-title">{{bookInfo.title}}</div>
-
-						<p class="item-author">
-						
-							<span v-for="itemAut in bookAuthor">{{itemAut}}</span>
-
-						</p>
-						<!-- bookInfo.price为78.90元，我想把“元”去掉 -->
-						<p class="item-prize">{{bookPrize|formPrize}}</p>
-
-						<div class="item-rating">
-							<div class="item-numRaters">{{bookRating.numRaters|formComment}}</div>
-							<div class="rank">
-								<span class="rating-stars" data-rating="4.7"><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span></span> <span>9.3</span>
-							</div>
-						</div>
-
-					</div>
-					
-				</div>
-			</li>
-
-
-
-			<li v-on:click="showAlldata">
+			<li v-on:click="showAlldata" v-show="isShow">
 
 				<div class="item-book">
 
@@ -77,7 +45,7 @@
 
 
 			<!-- 循环开始 -->
-				<li v-for="item in allShop">
+				<li v-for="item in allShop"  v-on:click="showAlldata">
 
 				<div class="item-book">
 
@@ -93,14 +61,14 @@
 
 						<p class="item-author">
 						
-							<span v-for="itemAut in bookAuthor">{{itemAut}}</span>
+							<span v-for="itemAut in item.author">{{itemAut}}</span>
 
 						</p>
 						<!-- bookInfo.price为78.90元，我想把“元”去掉 -->
-						<p class="item-prize">{{bookPrize|formPrize}}</p>
-
+						<p class="item-prize">{{item.price|formatTxt}}</p>
+						
 						<div class="item-rating">
-							<div class="item-numRaters">{{bookRating.numRaters|formComment}}</div>
+							<div class="item-numRaters">{{item.rating.max|formComment}}</div>
 							<div class="rank">
 								<span class="rating-stars" data-rating="4.7"><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span><span class="rating-star rating-star-small-full"></span></span> <span>9.3</span>
 							</div>
@@ -134,6 +102,7 @@
 		name:"Book",
 		data(){
 			return {
+				isShow:false,
 				title:"book",
 				msg:'hah',
 				bookInfo:'',
@@ -145,7 +114,11 @@
 		},
 		filters:{
 			 formatTxt:function(value){
-				return value;
+				return "￥"+value;
+			 },
+			 more:function(value){
+				var newMessage = value.slice(0,12)+"........点击查看更多";
+				return newMessage;
 			 },
 			 formPrize:function(value){
 			 	return  value ? "￥" + (value.slice(0, value.length - 1))  :  "" ;
@@ -157,7 +130,6 @@
 		},
 		created(){
 
-
 			for(let i=0;i<4;i++){
 				this.$axios({
 				method:'get',
@@ -168,7 +140,6 @@
 				this.bookRating = this.bookInfo.rating;
 				this.bookAuthor = this.bookInfo.author;
 				this.bookPrize = this.bookInfo.price;
-				console.log(i);	
 			})
 			}
 		},
