@@ -75,16 +75,36 @@
 	 	// 	}
 
 
- 		var ps = document.getElementsByTagName("p");  
+ 		// var ps = document.getElementsByTagName("p");  
 
- 		for( let i=0; i<ps.length; i++ ) {  
- 			ps[i].onclick = function() {  
- 				console.log(i);  
- 			}  
- 		}
+ 		// for( let i=0; i<ps.length; i++ ) {  
+ 		// 	ps[i].onclick = function() {  
+ 		// 		console.log(i);  
+ 		// 	}  
+ 		// }
+
+
+
 
 
 </script>
 
+
+
+
+
+<script>
+
+  import BScroll from 'better-scroll'
+
+  export default {
+  	mounted() {
+  		this.$nextTick(() => {
+  			console.log(BScroll);
+  			this.scroll = new Bscroll(this.$refs.wrapper, {})
+  		})
+  	}
+  }
+</script>
 </body>
 </html>
