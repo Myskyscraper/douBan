@@ -10,6 +10,7 @@
 
 		<div class="wrapper" ref="wrapper">
 			<ul class="content">
+				<li>{{title}}</li>
 				<li>...</li>
 				<li>...</li>
 				<li>...</li>
@@ -59,27 +60,42 @@
 		},
 		mounted() {
   		this.$nextTick(() => {
-			console.log('ok');
-  			// ---------------
-  			if (!this.scroll) {
-  				this.scroll = new BScroll(this.$refs.wrapper, {})
- 
-  				this.scroll.on('touchend', (pos) => {
-  					console.log(pos.y);
-                // 下拉动作
-                if (pos.y > 10) {
-                	this.loadData()
-                }
-            })
-  			} else {
-  				this.scroll.refresh()
-  			}
-  			// ---------------
+			this.loadMore()
+  			
   		})
+
   		},
   		methods:{
+
+			loadMore(){
+
+				// ---------------
+  			
+				this.scroll = new BScroll(this.$refs.wrapper, {
+					scrollbar :{
+						fade: true
+					},
+					pullUpLoad: {
+						   threshold: -20, // 在上拉到超过底部 20px 时，触发 pullingUp 事件
+						   stop:0
+						}
+					});
+
+				this.scroll.on('pullingUp', (pos) => {
+					this.loadData();
+				});
+				this.scroll.finishPullUp()
+				this.scroll.refresh()
+  			// ---------------
+
+			},
+
 			loadData(){
-				console.log('ok')
+				alert('ok')
+
+				this.scroll.finishPullUp();
+				this.scroll.refresh();
+
 			}
 
   		}
