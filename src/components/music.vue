@@ -10,7 +10,7 @@
 
 		<div class="wrapper" ref="wrapper">
 			<ul class="content">
-				<li>{{title}}</li>
+
 				<li>...</li>
 				<li>...</li>
 				<li>...</li>
@@ -20,6 +20,14 @@
 				<li>...</li>
 				<li>...</li>
 				<li>...</li>
+
+				<li>...</li>
+				<li>...</li>
+				<li>...</li>
+				<li>...</li>
+				<li>...</li>
+				<li>...</li>
+				
 			</ul>
 		</div>
 
@@ -30,7 +38,6 @@
 		</div>
 
 	</div>
-
 
 
 
@@ -48,56 +55,39 @@
 			}
 		},
 		created(){
-			this.$axios({
-				method:'get',
-				url:'/api/book/1003074'
-			}).then(response =>{
-				this.bookInfo = response.data;
-				this.$nextTick(() => {
-					this.scroll = new BScroll(this.$refs.wrapper, {})
-				})
+			this.$nextTick(() => {
+				this.loadMore()
 			})
 		},
 		mounted() {
-  		this.$nextTick(() => {
-			this.loadMore()
-  			
-  		})
-
+  		
+							
   		},
   		methods:{
-
 			loadMore(){
-
 				// ---------------
-  			
 				this.scroll = new BScroll(this.$refs.wrapper, {
-					scrollbar :{
-						fade: true
-					},
-					pullUpLoad: {
-						   threshold: -20, // 在上拉到超过底部 20px 时，触发 pullingUp 事件
-						   stop:0
-						}
-					});
+					 pullUpLoad:true,
+					 
+				}),
 
 				this.scroll.on('pullingUp', (pos) => {
-					this.loadData();
-				});
-				this.scroll.finishPullUp()
+					alert('ok+1'),
+					this.scroll.finishPullUp()
+
+				}),
+
+				this.scroll.on('pullingDown', (pos) => {
+					alert('ok+2')
+					
+				})
+
+				
+
 				this.scroll.refresh()
   			// ---------------
 
-			},
-
-			loadData(){
-				alert('ok')
-
-				this.scroll.finishPullUp();
-				this.scroll.refresh();
-
 			}
-
   		}
 
 	}
@@ -121,6 +111,14 @@
 		.wrapper{
 			height: 500px;
 			overflow: hidden;
+			.content{
+				li{
+					height: 40px;
+					font-size: 0.24rem;
+					color: red;
+				}
+			}
+			
 		}
 
 

@@ -46,8 +46,6 @@ npm install less less-loader --save-dev
 
 <style scoped lang="less">
 
-	
-
 </style>
 
 <!-- 增加下拉插件 -->
@@ -55,7 +53,6 @@ npm install less less-loader --save-dev
 //https://juejin.im/post/59b777015188257e764c716f
 
 //https://zhuanlan.zhihu.com/p/27407024 敢拆敢动的嘻嘻
-
 
 
 echo "# douBan" >> README.md
