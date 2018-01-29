@@ -65,27 +65,28 @@
   		},
   		methods:{
 			loadMore(){
-				// ---------------
 				this.scroll = new BScroll(this.$refs.wrapper, {
-					 pullUpLoad:true,
-					 
+					pullDownRefresh : {
+					  threshold: 50, 
+					  stop: 20
+					},
+					pullUpLoad : {
+					  threshold: -20 
+					}
 				}),
-
-				this.scroll.on('pullingUp', (pos) => {
-					alert('ok+1'),
-					this.scroll.finishPullUp()
-
-				}),
-
+			
 				this.scroll.on('pullingDown', (pos) => {
 					alert('ok+2')
-					
+					this.scroll.finishPullDown()
+				}),
+
+				this.scroll.on('pullingUp', () => {
+					alert('ok+1')
+					this.scroll.finishPullUp()
 				})
-
 				
-
 				this.scroll.refresh()
-  			// ---------------
+  			
 
 			}
   		}
