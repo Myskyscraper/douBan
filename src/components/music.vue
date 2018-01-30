@@ -9,24 +9,35 @@
 		<div class="music_title">影院热映</div>
 
 		<div class="wrapper" ref="wrapper">
+
 			<ul class="content">
 
-				<li>...</li>
-				<li>...</li>
-				<li>...</li>
-				<li>...</li>
-				<li>...</li>
-				<li>...</li>
-				<li>...</li>
-				<li>...</li>
-				<li>...</li>
+				<li v-for="">
+					<div class="item-img">
+						
+					</div>
 
-				<li>...</li>
-				<li>...</li>
-				<li>...</li>
-				<li>...</li>
-				<li>...</li>
-				<li>...</li>
+					<div class="item-name">
+						
+					</div>
+
+					<div class="item-discount">
+						6.5
+					</div>
+
+					<div class="item-class">
+						衬衣
+					</div>
+
+					<div class="item-prize">
+						￥68
+					</div>
+
+				
+
+				</li>
+				
+				
 				
 			</ul>
 		</div>
@@ -51,11 +62,25 @@
 		name:"Music",
 		data(){
 			return {
-				title:"book"
+				title:"book",
+				allGoods:''
 			}
 		},
 		created(){
+
+			this.$axios({
+					method:'get',
+					url:' http://datainfo.duapp.com/shopdata/getGoods.php'
+				}).then(response =>{
+					const txt = (response.data);
+					this.allGoods = txt.slice(8);
+					console.log(txt.slice(8))
+					console.log(this.allGoods);	
+
+				})
+
 			this.$nextTick(() => {
+
 				this.loadMore()
 			})
 		},
@@ -76,12 +101,12 @@
 				}),
 			
 				this.scroll.on('pullingDown', (pos) => {
-					alert('ok+2')
+					console.log('ok+2')
 					this.scroll.finishPullDown()
 				}),
 
 				this.scroll.on('pullingUp', () => {
-					alert('ok+1')
+					console.log('ok+1')
 					this.scroll.finishPullUp()
 				})
 				
@@ -102,6 +127,7 @@
 
 
 <style scoped lang="less">
+	*{margin: 0;padding: 0;}
 	li{list-style: none;}
 	.music_con{
 		.music_title{
@@ -114,9 +140,10 @@
 			overflow: hidden;
 			.content{
 				li{
-					height: 40px;
+					
 					font-size: 0.24rem;
 					color: red;
+					text-align: center;	
 				}
 			}
 			
