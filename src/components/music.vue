@@ -14,15 +14,16 @@
 					</div>
 
 					<div class="item-name">
-						{{item.goodsName}}
+						{{item.goodsName|ingFor}}
+					</div>
+
+		
+					<div class="item-class">
+						分类：{{item.className}}
 					</div>
 
 					<div class="item-discount">
-						{{item.discount}}
-					</div>
-
-					<div class="item-class">
-						{{item.className}}
+						限时{{item.discount}}折
 					</div>
 
 					<div class="item-prize">
@@ -55,6 +56,13 @@
 				title:"book",
 				allGoods:''
 			}
+		},
+		filters:{
+			ingFor:function(value){
+				var newMessage = value.slice(0,10)+"......";
+				return newMessage;
+			}
+
 		},
 		created(){
 
@@ -140,9 +148,8 @@
 				li{
 					font-size: 0.24rem;
 					color: red;
-					text-align: center;	
 					float: left;
-					height: 300px;
+					height: 280px;
 					width: 50%;
 					.item-img{
 						width: 160px;
@@ -151,6 +158,26 @@
 							width: 100%;
 							height: 100%
 						}
+					}
+					.item-name{
+						margin:10px 0 10px;
+						font-size: 14px;
+						color: #232326;
+					}
+					.item-prize{
+						color: #f15353;
+    					font-size: 16px;
+					}
+					.item-class{
+						color: #232326; 
+					}
+					.item-discount{
+						width: 70%;
+						border: 1px solid #dbdbdb;
+						color: #232326;
+						text-align: center;
+						line-height: 18px;
+						margin: 8px 0;
 					}
 				}
 			}
