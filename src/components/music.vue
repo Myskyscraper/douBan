@@ -136,14 +136,17 @@
 			height: 500px;
 			overflow: hidden;
 			.content{
+				height: 1500px;
 				li{
-					
 					font-size: 0.24rem;
 					color: red;
 					text-align: center;	
-					
+					float: left;
+					height: 300px;
 					width: 50%;
 					.item-img{
+						width: 160px;
+						height: 160px;
 						img{
 							width: 100%;
 							height: 100%
