@@ -1,8 +1,3 @@
-
-
-
-
-
 <template>
 
 	<div class="music_con">
@@ -12,37 +7,32 @@
 
 			<ul class="content">
 
-				<li v-for="">
+				<li v-for="item in allGoods">
+
 					<div class="item-img">
-						
+						<img v-bind:src="item.goodsListImg" alt="">
 					</div>
 
 					<div class="item-name">
-						
+						{{item.goodsName}}
 					</div>
 
 					<div class="item-discount">
-						6.5
+						{{item.discount}}
 					</div>
 
 					<div class="item-class">
-						衬衣
+						{{item.className}}
 					</div>
 
 					<div class="item-prize">
-						￥68
+						￥{{item.price}}
 					</div>
-
-				
-
 				</li>
-				
 				
 				
 			</ul>
 		</div>
-
-			
 
 		<div class="reback">
 			<router-link to="/user/01">图书</router-link>
@@ -71,12 +61,19 @@
 			this.$axios({
 					method:'get',
 					url:' http://datainfo.duapp.com/shopdata/getGoods.php'
-				}).then(response =>{
-					const txt = (response.data);
-					this.allGoods = txt.slice(8);
-					console.log(txt.slice(8))
-					console.log(this.allGoods);	
+				 }).then(response =>{
 
+				 	var rep = response.data;
+
+				 	var callCon = rep.slice(9,-1);
+
+					var obj = JSON.parse(callCon);
+
+					console.log(obj);
+					
+					this.allGoods = obj;
+
+					
 				})
 
 			this.$nextTick(() => {
@@ -144,6 +141,14 @@
 					font-size: 0.24rem;
 					color: red;
 					text-align: center;	
+					
+					width: 50%;
+					.item-img{
+						img{
+							width: 100%;
+							height: 100%
+						}
+					}
 				}
 			}
 			

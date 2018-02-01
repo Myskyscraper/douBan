@@ -13,6 +13,10 @@
 	<p>5</p> 
 
 
+	1:请求的是callback([])
+	我想要的是callback里面的东西的；
+
+
 
 <script type="text/javascript">
 	// proxyTable: {
@@ -84,9 +88,20 @@
  		// }
 
 
- 		var txt = "callback";
+ 		var obj = {data:"callback([{1:true},{1:true},{1:true},{1:true}])"};
 
- 		console.log(txt.slice(6));
+ 		var str = "callback([{1:true},{1:true},{1:true},{1:true}])";
+
+ 		var str1 = '[{1:true},{1:true},{1:true},{1:true}]';
+
+ 		
+		
+		console.log(JSON.parse('[1, 5, "false"]') );
+ 		
+ 		
+ 		
+
+ 		
 
 
 
