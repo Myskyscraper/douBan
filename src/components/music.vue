@@ -3,11 +3,13 @@
 	<div class="music_con">
 		<div class="music_title">影院热映</div>
 
+		<div v-on:click="show">hhahah</div>
+
 		<div class="wrapper" ref="wrapper">
 
 			<ul class="content">
 
-				<li v-for="item in allGoods">
+				<li v-for="item in allGoods" v-on:click="show">
 
 					<div class="item-img">
 						<img v-bind:src="item.goodsListImg" alt="">
@@ -66,7 +68,11 @@
 		},
 		created(){
 
-			this.$axios({
+			
+
+			this.$nextTick(() => {
+
+				this.$axios({
 					method:'get',
 					url:' http://datainfo.duapp.com/shopdata/getGoods.php'
 				 }).then(response =>{
@@ -80,21 +86,17 @@
 					console.log(obj);
 					
 					this.allGoods = obj;
-
-					
 				})
-
-			this.$nextTick(() => {
 
 				this.loadMore()
 			})
 		},
 		mounted() {
-  		
-							
+  						
   		},
   		methods:{
 			loadMore(){
+
 				this.scroll = new BScroll(this.$refs.wrapper, {
 					pullDownRefresh : {
 					  threshold: 50, 
@@ -102,7 +104,8 @@
 					},
 					pullUpLoad : {
 					  threshold: -20 
-					}
+					},
+					 click: true//这里配置点击
 				}),
 			
 				this.scroll.on('pullingDown', (pos) => {
@@ -110,14 +113,20 @@
 					this.scroll.finishPullDown()
 				}),
 
+				this.scroll.on('show', (pos) => {
+					console.log('ok+2')
+				},false),
+
+
 				this.scroll.on('pullingUp', () => {
 					console.log('ok+1')
 					this.scroll.finishPullUp()
 				})
 				
 				this.scroll.refresh()
-  			
-
+			},
+			show(){
+				console.log('ok');
 			}
   		}
 
@@ -144,7 +153,7 @@
 			height: 500px;
 			overflow: hidden;
 			.content{
-				height: 1500px;
+				height: 1400px;
 				li{
 					font-size: 0.24rem;
 					color: red;
