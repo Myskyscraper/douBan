@@ -3,8 +3,7 @@
 	<div class="music_con">
 		<div class="music_title">影院热映</div>
 
-		<div>hhahah</div>
-
+		
 		<div class="wrapper" ref="wrapper">
 
 			<ul class="content">
