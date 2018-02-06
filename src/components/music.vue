@@ -3,13 +3,13 @@
 	<div class="music_con">
 		<div class="music_title">影院热映</div>
 
-		<div v-on:click="show">hhahah</div>
+		<div>hhahah</div>
 
 		<div class="wrapper" ref="wrapper">
 
 			<ul class="content">
 
-				<li v-for="item in allGoods" v-on:click="show">
+				<li v-for="item in allGoods" v-on:click="goDetail(item)">
 
 					<div class="item-img">
 						<img v-bind:src="item.goodsListImg" alt="">
@@ -49,7 +49,9 @@
 
 <script type="text/javascript">
 
-	import BScroll from 'better-scroll'
+	import BScroll from 'better-scroll';
+
+	import router from '../router'
 
 	export default {
 		name:"Music",
@@ -125,8 +127,12 @@
 				
 				this.scroll.refresh()
 			},
-			show(){
-				console.log('ok');
+			goDetail(item){
+				var txt = JSON.stringify(item)
+				console.log(txt);
+				//router.push({path:"/user/03", query:{id:3}})
+
+				router.push({path:"/user/03", query:{shopdeta:item}})
 			}
   		}
 

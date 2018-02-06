@@ -10,6 +10,8 @@ import Book from '@/components/Book'
 
 import Music from '@/components/Music'
 
+import goodsDetail from '@/components/goodsDetail'
+
 import Test from '@/components/Test'
 
 
@@ -29,6 +31,9 @@ export default new Router({
 		}, {
 			path: '/',
 			redirect: '/user/01'
+		}, {
+			path: '/user/03',
+			component: goodsDetail
 		}
 
 	]
